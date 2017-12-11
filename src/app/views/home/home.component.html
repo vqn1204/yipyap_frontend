@@ -1,0 +1,51 @@
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<img src="https://i.pinimg.com/originals/76/e3/86/76e386e377e871a20ac7c694a5a65c6e.jpg" id="bg" alt="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+
+<nav class="navbar navbar-default navbar-fixed-top">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <b>
+          <font color="black">YipYap</font>
+        </b>
+      </a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active">
+        <a href="http://localhost:4200/home">Home</a>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li>
+        <a href="http://localhost:4200/myprofile">Profile</a>
+      </li>
+      <li>
+        <a href="#">Logout</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<body>
+  <div class="row">
+    <div class="col-sm-4 col-sm-offset-4">
+      <input type="text" name="newpost" placeholder="What's on your mind?">
+      <button class="button">Create Post</button>
+    </div>
+  </div>
+  <div class="container">
+    <div *ngFor="let post of posts">
+      <div class="card teal accent-1 z-depth-5">
+        <div class="card-content">
+          {{post.text}}
+        </div>
+        <div class="card-action">
+          <a href="#">up</a>
+          <a href="#">down</a>
+          <a href="#">comment</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
