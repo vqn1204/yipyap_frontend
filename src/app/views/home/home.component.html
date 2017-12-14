@@ -1,49 +1,66 @@
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 <img src="https://i.pinimg.com/originals/76/e3/86/76e386e377e871a20ac7c694a5a65c6e.jpg" id="bg" alt="">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">
-        <b>
-          <font color="black">YipYap</font>
-        </b>
-      </a>
+
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="http://localhost:4200/login" class="brand-logo">YipYap</a>
+      <ul class="right hide-on-med-and-down">
+        <li>
+          <a href="http://localhost:4200/myprofile" class="waves-effect waves-yellow btn">Profile</a>
+        </li>
+        <li>
+          <a href="#" class="waves-effect waves-light btn">Logout</a>
+        </li>
+      </ul>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active">
-        <a href="http://localhost:4200/home">Home</a>
-      </li>
-    </ul>
-    <ul class="nav navbar-nav navbar-right">
-      <li>
-        <a href="http://localhost:4200/myprofile">Profile</a>
-      </li>
-      <li>
-        <a href="#">Logout</a>
-      </li>
-    </ul>
-  </div>
-</nav>
+  </nav>
+</div>
 
 <body>
-  <div class="row">
-    <div class="col-sm-4 col-sm-offset-4">
-      <input type="text" name="newpost" placeholder="What's on your mind?">
-      <button class="button">Create Post</button>
+  <form #myForm="ngForm" (ngSubmit)="createPost($event)">
+    <div class="row">
+      <div class="input-field col l6 offset-l3">
+        <input placeholder="What's on your mind?" name="new-post" type="text" [(ngModel)]="text" name="postText" autocomplete="off"
+          required>
+      </div>
     </div>
-  </div>
-  <div class="container">
-    <div *ngFor="let post of posts">
-      <div class="card teal accent-1 z-depth-5">
-        <div class="card-content">
-          {{post.text}}
-        </div>
-        <div class="card-action">
-          <a href="#">up</a>
-          <a href="#">down</a>
-          <a href="#">comment</a>
+    <div class="row">
+      <div class="col l6 offset-l3">
+        <button class="btn waves-effect waves-light" type="submit" [disabled]="!myForm.form.valid">Post
+          <i class="material-icons right">send</i>
+        </button>
+      </div>
+    </div>
+  </form>
+  <div class="row">
+    <div class="container">
+      <div *ngIf="posts">
+        <div *ngFor="let post of posts.reverse()">
+          <div class="card teal accent-1 z-depth-5">
+            <div class="card-content">
+              {{post.text}}
+            </div>
+            <div class="card-action">
+              <span id=upvote-downvote>
+                <a class="btn-floating waves-effect waves-yellow">
+                  <i class="material-icons">arrow_drop_up</i>
+                </a>
+                <p>test</p>
+                <a class="btn-floating waves-effect waves-yellow">
+                  <i class="material-icons">arrow_drop_down</i>
+                </a>
+              </span>
+              <a class="btn-floating waves-effect waves-yellow">
+                <i class="material-icons">mode_comment</i>
+              </a>
+              <button class="btn right waves-effect waves-yellow" (click)="deletePost(post._id)" type="button">
+                <i class="material-icons">delete</i>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
